@@ -73,3 +73,25 @@ if (shareBtn) {
     }
   });
 }
+
+const galleryImages = document.querySelectorAll(".gallery-grid img");
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightboxImg");
+const lightboxClose = document.getElementById("lightboxClose");
+
+galleryImages.forEach((img) => {
+  img.addEventListener("click", () => {
+    lightboxImg.src = img.src;
+    lightbox.classList.add("show");
+  });
+});
+
+lightboxClose.addEventListener("click", () => {
+  lightbox.classList.remove("show");
+});
+
+lightbox.addEventListener("click", (event) => {
+  if (event.target === lightbox) {
+    lightbox.classList.remove("show");
+  }
+});
