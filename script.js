@@ -74,24 +74,45 @@ if (shareBtn) {
   });
 }
 
-const galleryImages = document.querySelectorAll(".gallery-grid img");
+ const galleryImages = Array.from(document.querySelectorAll(".gallery-grid img"));
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightboxImg");
 const lightboxClose = document.getElementById("lightboxClose");
+const prevPhoto = document.getElementById("prevPhoto");
+const nextPhoto = document.getElementById("nextPhoto");
+const photoCounter = document.getElementById("photoCounter");
 
-galleryImages.forEach((img) => {
-  img.addEventListener("click", () => {
-    lightboxImg.src = img.src;
-    lightbox.classList.add("show");
-  });
+let currentPhotoIndex = 0;
+
+function showPhoto(index){
+    currentPhotoIndex = (index + galleryImages.length) % galleryImages.length;
+    lightboxImg.src = galleryImages[currentPhotoIndex].src;
+    photoCounter.textContent = `${currentPhotoIndex + 1} / ${galleryImages.length}`;
+}
+
+galleryImages.forEach((img,index)=>{
+    img.addEventListener("click",()=>{
+        showPhoto(index);
+        lightbox.classList.add("show");
+    });
 });
 
-lightboxClose.addEventListener("click", () => {
-  lightbox.classList.remove("show");
-});
-
-lightbox.addEventListener("click", (event) => {
-  if (event.target === lightbox) {
+lightboxClose.addEventListener("click",()=>{
     lightbox.classList.remove("show");
-  }
+});
+
+prevPhoto.addEventListener("click",(e)=>{
+    e.stopPropagation();
+    showPhoto(currentPhotoIndex-1);
+});
+
+nextPhoto.addEventListener("click",(e)=>{
+    e.stopPropagation();
+    showPhoto(currentPhotoIndex+1);
+});
+
+lightbox.addEventListener("click",(e)=>{
+    if(e.target===lightbox){
+        lightbox.classList.remove("show");
+    }
 });
