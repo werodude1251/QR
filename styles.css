@@ -228,3 +228,12 @@ body{
 body{
   padding-bottom:95px;
 }
+
+.alert-card{
+  border:1px solid rgba(251,191,36,.45);
+  background:linear-gradient(160deg,rgba(251,191,36,.20),rgba(255,255,255,.05));
+}
+
+.alert-card strong{
+  color:#fde68a;
+}
