@@ -39,6 +39,16 @@ body{
   font-weight:800;
 }
 .mate-photo{
+
+.photo-caption{
+    text-align:center;
+    margin-top:10px;
+    color:#cbd5e1;
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:.03em;
+}
+
   width:100%;
   max-height:330px;
   object-fit:cover;
