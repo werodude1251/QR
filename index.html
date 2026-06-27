@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f172a" />
+  <title>Mate | Identificación digital</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="manifest" href="manifest.json" />
+</head>
+<body>
+  <main class="app-shell">
+    <section class="hero-card reveal">
+      <div class="badge">🐾 Identificación digital</div>
+
+      <img class="mate-photo" src="img/mate.jpg" alt="Foto de Mate, perrito blanco tipo Maltés" />
+
+      <div class="hero-content">
+        <p class="eyebrow">Ayúdame a volver a casa</p>
+        <h1>Mate</h1>
+        <p class="message">
+          Hola, si estás leyendo esto es porque encontraste a mi perrito Mate. Por favor ayúdame a contactarme para poder seguirle dando mucho amor a mi perrito, estaré muy agradecida contigo.
+        </p>
+
+        <button class="primary-btn" id="foundBtn">📍 Encontré a Mate</button>
+
+        <div class="quick-actions">
+          <a class="action-btn call" href="tel:+523313976529">📞 Llamar</a>
+          <a class="action-btn whatsapp" href="https://wa.me/523313976529?text=Hola%20Paola%2C%20encontr%C3%A9%20a%20Mate.%20%C2%BFMe%20puedes%20responder%20para%20entreg%C3%A1rtelo%3F" target="_blank" rel="noopener">💬 WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="card reveal">
+      <h2>🎥 Conoce a Mate</h2>
+      <p class="card-text">Un video corto para reconocerlo mejor.</p>
+      <div class="video-frame">
+        <iframe
+          src="https://www.youtube.com/embed/xTPfSoeQg5o"
+          title="Video de Mate"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </section>
+
+    <section class="card reveal">
+      <h2>🐶 Información de Mate</h2>
+      <div class="info-grid">
+        <article><span>🎂</span><strong>11 años</strong><small>Nació el 4 de julio de 2015</small></article>
+        <article><span>🐕</span><strong>Tipo Maltés</strong><small>Color blanco</small></article>
+        <article><span>💉</span><strong>Vacunas al día</strong><small>Cuenta con sus vacunas</small></article>
+        <article><span>✅</span><strong>Esterilizado</strong><small>Sí</small></article>
+      </div>
+    </section>
+
+    <section class="card alert-card reveal">
+      <h2>⚠️ Cuidados especiales</h2>
+      <p>
+        Mate necesita cuidado especial por su riñón. Por favor no le des comida humana; necesita una dieta especial para cuidado renal.
+      </p>
+    </section>
+
+    <section class="card contact-card reveal">
+      <h2>👩 Contacto</h2>
+      <p><strong>Dueña:</strong> Paola de León</p>
+      <p><strong>Celular / WhatsApp:</strong> 3313976529</p>
+      <button class="primary-btn secondary" id="foundBtnBottom">📍 Enviar mi ubicación</button>
+    </section>
+
+    <footer>
+      Gracias por ayudar a Mate 🐾❤️
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
