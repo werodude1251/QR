@@ -32,35 +32,32 @@
     </section>
 
     <section class="card reveal">
-  <h2>📷 Más fotos de Mate</h2>
-
-  <div class="gallery-grid">
-    <img src="img/mate1.jpg" alt="Mate">
-    <img src="img/mate2.jpg" alt="Mate">
-    <img src="img/mate3.jpg" alt="Mate">
-    <img src="img/mate4.jpg" alt="Mate">
-    <img src="img/mate5.jpg" alt="Mate">
-    <img src="img/mate6.jpg" alt="Mate">
-  </div>
-</section>
-
-    <section class="card reveal">
       <h2>🎥 Conoce a Mate</h2>
 
-   <section class="card reveal">
-  <h2>🎥 Conoce a Mate</h2>
+      <a class="youtube-preview" href="https://youtube.com/shorts/xTPfSoeQg5o?feature=share" target="_blank" rel="noopener" aria-label="Ver video de Mate en YouTube">
+        <img src="https://img.youtube.com/vi/xTPfSoeQg5o/hqdefault.jpg" alt="Miniatura del video de Mate" />
+        <div class="youtube-overlay">
+          <span class="play-circle">▶</span>
+          <div>
+            <strong>Ver video de Mate</strong>
+            <small>Se abrirá en YouTube</small>
+          </div>
+        </div>
+      </a>
+    </section>
 
-  <a class="youtube-card"
-     href="https://youtube.com/shorts/xTPfSoeQg5o?feature=share"
-     target="_blank"
-     rel="noopener">
-    <div class="youtube-icon">▶</div>
-    <div>
-      <strong>Ver video de Mate</strong>
-      <span>Se abrirá en YouTube</span>
-    </div>
-  </a>
-</section>
+    <section class="card reveal">
+      <h2>📷 Más fotos de Mate</h2>
+
+      <div class="gallery-grid">
+        <button class="gallery-item" type="button" data-src="img/mate1.jpg" aria-label="Abrir foto 1 de Mate"><img src="img/mate1.jpg" alt="Mate"></button>
+        <button class="gallery-item" type="button" data-src="img/mate2.jpg" aria-label="Abrir foto 2 de Mate"><img src="img/mate2.jpg" alt="Mate"></button>
+        <button class="gallery-item" type="button" data-src="img/mate3.jpg" aria-label="Abrir foto 3 de Mate"><img src="img/mate3.jpg" alt="Mate"></button>
+        <button class="gallery-item" type="button" data-src="img/mate4.jpg" aria-label="Abrir foto 4 de Mate"><img src="img/mate4.jpg" alt="Mate"></button>
+        <button class="gallery-item" type="button" data-src="img/mate5.jpg" aria-label="Abrir foto 5 de Mate"><img src="img/mate5.jpg" alt="Mate"></button>
+        <button class="gallery-item" type="button" data-src="img/mate6.jpg" aria-label="Abrir foto 6 de Mate"><img src="img/mate6.jpg" alt="Mate"></button>
+      </div>
+    </section>
 
     <section class="card reveal">
       <h2>🐶 Información de Mate</h2>
@@ -90,6 +87,13 @@
       Gracias por ayudar a Mate 🐾❤️
     </footer>
   </main>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" type="button" id="lightboxClose" aria-label="Cerrar foto">×</button>
+    <button class="lightbox-nav prev" type="button" id="lightboxPrev" aria-label="Foto anterior">‹</button>
+    <img id="lightboxImg" src="" alt="Foto de Mate ampliada" />
+    <button class="lightbox-nav next" type="button" id="lightboxNext" aria-label="Foto siguiente">›</button>
+  </div>
 
   <script src="script.js"></script>
 </body>
