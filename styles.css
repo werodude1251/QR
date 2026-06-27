@@ -84,3 +84,40 @@ footer{text-align:center; color:var(--muted); padding:24px 10px 10px}
   .mate-photo{height:360px; max-height:none}
 }
 @media (max-width:380px){.quick-actions{grid-template-columns:1fr}.info-grid{grid-template-columns:1fr}.mate-photo{max-height:260px}}
+.youtube-card{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  width:100%;
+  padding:18px;
+  margin-top:14px;
+  border-radius:22px;
+  background:linear-gradient(135deg,#ff0033,#cc0029);
+  color:white;
+  text-decoration:none;
+  box-shadow:0 14px 34px rgba(255,0,51,.28);
+}
+
+.youtube-icon{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  background:white;
+  color:#ff0033;
+  display:grid;
+  place-items:center;
+  font-size:26px;
+  font-weight:900;
+  flex-shrink:0;
+}
+
+.youtube-card strong{
+  display:block;
+  font-size:18px;
+}
+
+.youtube-card span{
+  display:block;
+  opacity:.9;
+  margin-top:4px;
+}
