@@ -4,4 +4,4 @@ Versión compacta basada en la primera versión: foto como tarjeta, botones visi
 
 URL sugerida:
 
-https://werodude1251.github.io/QR/?v=40
+https://werodude1251.github.io/QR/
