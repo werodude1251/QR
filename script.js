@@ -140,3 +140,13 @@ lightbox.addEventListener("click",(e)=>{
         lightbox.classList.remove("show");
     }
 });
+
+const splashScreen = document.getElementById("splashScreen");
+
+if (splashScreen) {
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      splashScreen.classList.add("hide");
+    }, 1100);
+  });
+}
