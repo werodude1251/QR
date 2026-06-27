@@ -1,75 +1,64 @@
-const phone = '523313976529';
-const foundButtons = [document.getElementById('foundBtn'), document.getElementById('foundBtnBottom')].filter(Boolean);
+const phone = "523313976529";
 
-function sendLocation(btn){
-  const original = btn.textContent;
-  btn.textContent = '📍 Obteniendo ubicación...';
-  btn.disabled = true;
+function sendLocation() {
+  const btns = [
+    document.getElementById("foundBtn"),
+    document.getElementById("foundBtnBottom"),
+    document.getElementById("foundBtnSticky")
+  ].filter(Boolean);
 
-  const fallback = () => {
-    const text = encodeURIComponent('Hola Paola, encontré a Mate. No pude compartir mi ubicación automáticamente, pero estoy con él.');
-    window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
-    btn.textContent = original;
-    btn.disabled = false;
-  };
+  btns.forEach(btn => btn.textContent = "📍 Obteniendo ubicación...");
 
-  if(!navigator.geolocation){ fallback(); return; }
+  if (!navigator.geolocation) {
+    openWhatsAppNoLocation();
+    return;
+  }
 
   navigator.geolocation.getCurrentPosition(
-    ({coords}) => {
-      const maps = `https://maps.google.com/?q=${coords.latitude},${coords.longitude}`;
-      const text = encodeURIComponent(`Hola Paola, encontré a Mate.\n\nMi ubicación es:\n${maps}\n\nEstoy con él.`);
-      window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
-      btn.textContent = '✅ Abrí WhatsApp';
-      btn.disabled = false;
+    (position) => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+      const mapsUrl = `https://maps.google.com/?q=${lat},${lon}`;
+
+      const message =
+        `Hola Paola 👋%0A%0A` +
+        `Encontré a Mate 🐶%0A%0A` +
+        `Mi ubicación es:%0A${mapsUrl}%0A%0A` +
+        `Estoy con él.`;
+
+      window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+
+      btns.forEach(btn => btn.textContent = "✅ Abrir WhatsApp");
     },
-    fallback,
-    {enableHighAccuracy:true, timeout:10000, maximumAge:0}
+    () => {
+      openWhatsAppNoLocation();
+    },
+    {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 0
+    }
   );
 }
 
-foundButtons.forEach(btn => btn.addEventListener('click', () => sendLocation(btn)));
+function openWhatsAppNoLocation() {
+  const message =
+    `Hola Paola 👋%0A%0A` +
+    `Encontré a Mate 🐶, pero no pude compartir mi ubicación automáticamente.`;
 
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightboxImg');
-const lightboxClose = document.getElementById('lightboxClose');
-
-document.querySelectorAll('.gallery-item').forEach(item => {
-  item.addEventListener('click', () => {
-    lightboxImg.src = item.dataset.img;
-    lightbox.classList.add('open');
-    lightbox.setAttribute('aria-hidden', 'false');
-  });
-});
-
-function closeLightbox(){
-  lightbox.classList.remove('open');
-  lightbox.setAttribute('aria-hidden', 'true');
-  lightboxImg.src = '';
+  window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
 }
 
-lightboxClose?.addEventListener('click', closeLightbox);
-lightbox?.addEventListener('click', event => {
-  if(event.target === lightbox) closeLightbox();
+["foundBtn", "foundBtnBottom", "foundBtnSticky"].forEach(id => {
+  const btn = document.getElementById(id);
+  if (btn) btn.addEventListener("click", sendLocation);
 });
-document.addEventListener('keydown', event => {
-  if(event.key === 'Escape') closeLightbox();
-});
-
-if('serviceWorker' in navigator){
-  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(()=>{}));
-}
-const stickyButton = document.getElementById("foundBtnSticky");
-if (stickyButton) {
-  stickyButton.addEventListener("click", () => {
-    document.getElementById("foundBtn").click();
-  });
-}
 
 const shareBtn = document.getElementById("shareBtn");
+
 if (shareBtn) {
   shareBtn.addEventListener("click", async () => {
-    const url = "https://werodude1251.github.io/QR/?v=40";
+    const url = "https://werodude1251.github.io/QR/";
     const text = "Esta es la identificación digital de Mate 🐶";
 
     if (navigator.share) {
@@ -79,7 +68,7 @@ if (shareBtn) {
         url
       });
     } else {
-      navigator.clipboard.writeText(url);
+      await navigator.clipboard.writeText(url);
       alert("Enlace copiado.");
     }
   });
