@@ -111,6 +111,25 @@ nextPhoto.addEventListener("click",(e)=>{
     showPhoto(currentPhotoIndex+1);
 });
 
+let startX = 0;
+
+lightboxImg.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+});
+
+lightboxImg.addEventListener("touchend", (e) => {
+    const endX = e.changedTouches[0].clientX;
+    const diff = startX - endX;
+
+    if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+            showPhoto(currentPhotoIndex + 1);
+        } else {
+            showPhoto(currentPhotoIndex - 1);
+        }
+    }
+});
+
 lightbox.addEventListener("click",(e)=>{
     if(e.target===lightbox){
         lightbox.classList.remove("show");
