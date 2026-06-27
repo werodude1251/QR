@@ -1,18 +1,52 @@
+/* ===========================
+   Configuración
+=========================== */
 const phone = "523313976529";
+const siteUrl = "https://werodude1251.github.io/QR/";
 
-function sendLocation() {
-    const toast = document.getElementById("statusToast");
+/* ===========================
+   Splash screen
+=========================== */
+const splashScreen = document.getElementById("splashScreen");
+
+if (splashScreen) {
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      splashScreen.classList.add("hide");
+    }, 1100);
+  });
+}
+
+/* ===========================
+   Enviar ubicación por WhatsApp
+=========================== */
+function showStatusToast() {
+  const toast = document.getElementById("statusToast");
   if (toast) {
     toast.classList.add("show");
     setTimeout(() => toast.classList.remove("show"), 3500);
   }
-  const btns = [
-    document.getElementById("foundBtn"),
-    document.getElementById("foundBtnBottom"),
-    document.getElementById("foundBtnSticky")
-  ].filter(Boolean);
+}
 
-  btns.forEach(btn => btn.textContent = "📍 Obteniendo ubicación...");
+function setFoundButtonsText(text) {
+  ["foundBtn", "foundBtnBottom", "foundBtnSticky"].forEach((id) => {
+    const btn = document.getElementById(id);
+    if (btn) btn.textContent = text;
+  });
+}
+
+function openWhatsAppNoLocation() {
+  const message =
+    `Hola Paola 👋%0A%0A` +
+    `Encontré a Mate 🐶, pero no pude compartir mi ubicación automáticamente.`;
+
+  window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+  setFoundButtonsText("📍 Encontré a Mate");
+}
+
+function sendLocation() {
+  showStatusToast();
+  setFoundButtonsText("📍 Obteniendo ubicación...");
 
   if (!navigator.geolocation) {
     openWhatsAppNoLocation();
@@ -32,8 +66,7 @@ function sendLocation() {
         `Estoy con él.`;
 
       window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
-
-      btns.forEach(btn => btn.textContent = "✅ Abrir WhatsApp");
+      setFoundButtonsText("📍 Encontré a Mate");
     },
     () => {
       openWhatsAppNoLocation();
@@ -46,40 +79,41 @@ function sendLocation() {
   );
 }
 
-function openWhatsAppNoLocation() {
-  const message =
-    `Hola Paola 👋%0A%0A` +
-    `Encontré a Mate 🐶, pero no pude compartir mi ubicación automáticamente.`;
-
-  window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
-}
-
-["foundBtn", "foundBtnBottom", "foundBtnSticky"].forEach(id => {
+["foundBtn", "foundBtnBottom", "foundBtnSticky"].forEach((id) => {
   const btn = document.getElementById(id);
   if (btn) btn.addEventListener("click", sendLocation);
 });
 
+/* ===========================
+   Compartir ficha
+=========================== */
 const shareBtn = document.getElementById("shareBtn");
 
 if (shareBtn) {
   shareBtn.addEventListener("click", async () => {
-    const url = "https://werodude1251.github.io/QR/";
     const text = "Esta es la identificación digital de Mate 🐶";
 
     if (navigator.share) {
       await navigator.share({
         title: "Mate | Identificación digital",
         text,
-        url
+        url: siteUrl
       });
     } else {
-      await navigator.clipboard.writeText(url);
+      await navigator.clipboard.writeText(siteUrl);
       alert("Enlace copiado.");
     }
   });
 }
 
- const galleryImages = Array.from(document.querySelectorAll(".gallery-grid img"));
+/* ===========================
+   Galería y lightbox
+=========================== */
+const galleryImages = [
+  document.querySelector(".mate-photo"),
+  ...Array.from(document.querySelectorAll(".gallery-grid img"))
+].filter(Boolean);
+
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightboxImg");
 const lightboxClose = document.getElementById("lightboxClose");
@@ -88,65 +122,57 @@ const nextPhoto = document.getElementById("nextPhoto");
 const photoCounter = document.getElementById("photoCounter");
 
 let currentPhotoIndex = 0;
-
-function showPhoto(index){
-    currentPhotoIndex = (index + galleryImages.length) % galleryImages.length;
-    lightboxImg.src = galleryImages[currentPhotoIndex].src;
-    photoCounter.textContent = `${currentPhotoIndex + 1} / ${galleryImages.length}`;
-}
-
-galleryImages.forEach((img,index)=>{
-    img.addEventListener("click",()=>{
-        showPhoto(index);
-        lightbox.classList.add("show");
-    });
-});
-
-lightboxClose.addEventListener("click",()=>{
-    lightbox.classList.remove("show");
-});
-
-prevPhoto.addEventListener("click",(e)=>{
-    e.stopPropagation();
-    showPhoto(currentPhotoIndex-1);
-});
-
-nextPhoto.addEventListener("click",(e)=>{
-    e.stopPropagation();
-    showPhoto(currentPhotoIndex+1);
-});
-
 let startX = 0;
 
-lightboxImg.addEventListener("touchstart", (e) => {
-    startX = e.touches[0].clientX;
-});
+function showPhoto(index) {
+  if (!galleryImages.length) return;
+  currentPhotoIndex = (index + galleryImages.length) % galleryImages.length;
+  lightboxImg.src = galleryImages[currentPhotoIndex].src;
+  photoCounter.textContent = `${currentPhotoIndex + 1} / ${galleryImages.length}`;
+}
 
-lightboxImg.addEventListener("touchend", (e) => {
+if (galleryImages.length && lightbox && lightboxImg && lightboxClose && prevPhoto && nextPhoto && photoCounter) {
+  galleryImages.forEach((img, index) => {
+    img.addEventListener("click", () => {
+      showPhoto(index);
+      lightbox.classList.add("show");
+    });
+  });
+
+  lightboxClose.addEventListener("click", () => {
+    lightbox.classList.remove("show");
+  });
+
+  prevPhoto.addEventListener("click", (e) => {
+    e.stopPropagation();
+    showPhoto(currentPhotoIndex - 1);
+  });
+
+  nextPhoto.addEventListener("click", (e) => {
+    e.stopPropagation();
+    showPhoto(currentPhotoIndex + 1);
+  });
+
+  lightboxImg.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  lightboxImg.addEventListener("touchend", (e) => {
     const endX = e.changedTouches[0].clientX;
     const diff = startX - endX;
 
     if (Math.abs(diff) > 50) {
-        if (diff > 0) {
-            showPhoto(currentPhotoIndex + 1);
-        } else {
-            showPhoto(currentPhotoIndex - 1);
-        }
+      if (diff > 0) {
+        showPhoto(currentPhotoIndex + 1);
+      } else {
+        showPhoto(currentPhotoIndex - 1);
+      }
     }
-});
+  });
 
-lightbox.addEventListener("click",(e)=>{
-    if(e.target===lightbox){
-        lightbox.classList.remove("show");
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) {
+      lightbox.classList.remove("show");
     }
-});
-
-const splashScreen = document.getElementById("splashScreen");
-
-if (splashScreen) {
-  window.addEventListener("load", () => {
-    setTimeout(() => {
-      splashScreen.classList.add("hide");
-    }, 1100);
   });
 }

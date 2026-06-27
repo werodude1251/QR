@@ -1,7 +1,11 @@
-# QR-Mate version final
+# QR Mate v6 Premium
 
-Versión compacta basada en la primera versión: foto como tarjeta, botones visibles al abrir, video de YouTube incrustado e información médica.
+Identificación digital premium para Mate.
 
-URL sugerida:
+URL pública sugerida para el QR definitivo:
 
 https://werodude1251.github.io/QR/
+
+Para pruebas y evitar caché puedes usar:
+
+https://werodude1251.github.io/QR/?v=60

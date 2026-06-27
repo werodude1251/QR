@@ -3,44 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0f172a" />
+  <meta name="theme-color" content="#08111f" />
   <title>Mate | Identificación digital</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="manifest" href="manifest.json" />
 </head>
 <body>
-  
-<div class="splash-screen" id="splashScreen">
-  <div class="splash-content">
-    <div class="splash-paw">🐾</div>
-    <h2>Mate</h2>
-    <p>Identificación digital</p>
+  <!-- Pantalla de bienvenida -->
+  <div class="splash-screen" id="splashScreen" aria-hidden="true">
+    <div class="splash-content">
+      <div class="splash-paw">🐾</div>
+      <h2>Mate</h2>
+      <p>Identificación digital</p>
+    </div>
   </div>
-</div>
-
-  <div class="sticky-actions">
-  <button class="primary-btn" id="foundBtnSticky">📍 Encontré a Mate</button>
-  <button class="share-btn" id="shareBtn">🔗 Compartir</button>
-</div>
 
   <main class="app-shell">
+    <!-- Hero principal -->
     <section class="hero-card reveal">
-      <div class="badge">🐾 Identificación digital</div>
+      <div class="badge">🐾 Ayúdame a volver a casa</div>
 
       <img class="mate-photo" src="img/mate.jpg" alt="Foto de Mate, perrito blanco tipo Maltés" />
-
-<p class="photo-caption">
-  🐶 Maltés • 🤍 Blanco • 🎂 11 años
-</p>
+      <p class="photo-caption">🐶 Maltés • 🤍 Blanco • 🎂 11 años</p>
 
       <div class="hero-content">
-       <p class="eyebrow">🐾 Ayudame a volver a casa</p>
-<h1>Hola, soy Mate</h1>
-<p class="message">
-  Estoy perdido. Si me encontraste, por favor ayúdame a regresar con mi familia. 
-  Mi dueña Paola me quiere mucho y necesito volver a casa para seguir recibiendo mis cuidados especiales.
-</p>
-
+        <p class="eyebrow">🐾 Identificación digital</p>
+        <h1>Hola, soy Mate</h1>
+        <p class="message">
+          Estoy perdido. Si me encontraste, por favor ayúdame a regresar con mi familia.
+          Mi dueña Paola me quiere mucho y necesito volver a casa para seguir recibiendo mis cuidados especiales.
+        </p>
 
         <button class="primary-btn" id="foundBtn">📍 Encontré a Mate</button>
 
@@ -51,9 +43,10 @@
       </div>
     </section>
 
+    <!-- Video -->
     <section class="card reveal">
       <h2>🎥 Conoce a Mate</h2>
-      <p class="card-text">Mira este video corto para reconocerlo mejor.</p>
+      <p class="section-hint">Video corto para reconocerlo mejor.</p>
 
       <div class="video-frame">
         <iframe
@@ -65,49 +58,53 @@
       </div>
     </section>
 
+    <!-- Galería -->
     <section class="card reveal">
       <h2>📷 Más fotos de Mate</h2>
-      <p class="card-text">Toca una foto para verla más grande.</p>
+      <p class="section-hint">Toca una foto para verla grande. Puedes deslizar para cambiar de foto.</p>
 
-      <div class="gallery-grid" id="galleryGrid">
-        <button class="gallery-item" type="button" data-img="img/mate1.jpg" aria-label="Ver foto 1 de Mate"><img src="img/mate1.jpg" alt="Mate foto 1"></button>
-        <button class="gallery-item" type="button" data-img="img/mate2.jpg" aria-label="Ver foto 2 de Mate"><img src="img/mate2.jpg" alt="Mate foto 2"></button>
-        <button class="gallery-item" type="button" data-img="img/mate3.jpg" aria-label="Ver foto 3 de Mate"><img src="img/mate3.jpg" alt="Mate foto 3"></button>
-        <button class="gallery-item" type="button" data-img="img/mate4.jpg" aria-label="Ver foto 4 de Mate"><img src="img/mate4.jpg" alt="Mate foto 4"></button>
-        <button class="gallery-item" type="button" data-img="img/mate5.jpg" aria-label="Ver foto 5 de Mate"><img src="img/mate5.jpg" alt="Mate foto 5"></button>
-        <button class="gallery-item" type="button" data-img="img/mate6.jpg" aria-label="Ver foto 6 de Mate"><img src="img/mate6.jpg" alt="Mate foto 6"></button>
+      <div class="gallery-grid">
+        <img src="img/mate1.jpg" alt="Mate">
+        <img src="img/mate2.jpg" alt="Mate">
+        <img src="img/mate3.jpg" alt="Mate">
+        <img src="img/mate4.jpg" alt="Mate">
+        <img src="img/mate5.jpg" alt="Mate">
+        <img src="img/mate6.jpg" alt="Mate">
       </div>
     </section>
 
+    <!-- Información -->
     <section class="card reveal">
       <h2>🐶 Información de Mate</h2>
       <div class="info-grid">
         <article><span>🎂</span><strong>11 años</strong><small>Nació el 4 de julio de 2015</small></article>
-        <article><span>🐕</span><strong>Tipo French</strong><small>Color blanco</small></article>
+        <article><span>🐕</span><strong>Tipo Maltés</strong><small>Color blanco</small></article>
         <article><span>💉</span><strong>Vacunas al día</strong><small>Cuenta con sus vacunas</small></article>
         <article><span>✅</span><strong>Esterilizado</strong><small>Sí</small></article>
       </div>
     </section>
 
+    <!-- Cuidados -->
     <section class="card alert-card reveal">
-  <h2>🚨 Cuidado importante</h2>
-  <p>
-    Mate necesita cuidado especial por su riñón.
-    Por favor <strong>no le des comida humana</strong>.
-    Necesita dieta renal especial y volver pronto con Paola.
-  </p>
-</section>
+      <h2>🚨 Cuidado importante</h2>
+      <p>
+        Mate necesita cuidado especial por su riñón. Por favor <strong>no le des comida humana</strong>.
+        Necesita dieta renal especial y volver pronto con Paola.
+      </p>
+    </section>
 
-<section class="card reveal">
-  <h2>🐾 Cómo soy</h2>
-  <div class="info-grid">
-    <article><span>💙</span><strong>Tranquilo</strong><small>Perrito mayor y noble</small></article>
-    <article><span>🐶</span><strong>Amigable</strong><small>Le gusta estar acompañado</small></article>
-    <article><span>🥣</span><strong>Dieta especial</strong><small>No comida humana</small></article>
-    <article><span>🏠</span><strong>Necesita volver</strong><small>Su familia lo espera</small></article>
-  </div>
-</section>
+    <!-- Cómo soy -->
+    <section class="card reveal">
+      <h2>🐾 Cómo soy</h2>
+      <div class="info-grid">
+        <article><span>💙</span><strong>Tranquilo</strong><small>Perrito mayor y noble</small></article>
+        <article><span>🐶</span><strong>Amigable</strong><small>Le gusta estar acompañado</small></article>
+        <article><span>🥣</span><strong>Dieta especial</strong><small>No comida humana</small></article>
+        <article><span>🏠</span><strong>Necesita volver</strong><small>Su familia lo espera</small></article>
+      </div>
+    </section>
 
+    <!-- Contacto -->
     <section class="card contact-card reveal">
       <h2>👩 Contacto</h2>
       <p><strong>Dueña:</strong> Paola de León</p>
@@ -118,33 +115,28 @@
     <footer>
       Gracias por ayudar a Mate 🐾❤️
     </footer>
-
- <div class="sticky-actions">
-  <button class="primary-btn" id="foundBtnSticky">📍 Encontré a Mate</button>
-  <button class="share-btn" id="shareBtn">🔗 Compartir</button>
-</div>
-
   </main>
 
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Cerrar foto">×</button>
-    <img id="lightboxImg" src="" alt="Foto ampliada de Mate">
+  <!-- Barra fija inferior -->
+  <div class="sticky-actions">
+    <button class="primary-btn" id="foundBtnSticky">📍 Encontré a Mate</button>
+    <button class="share-btn" id="shareBtn">🔗 Compartir</button>
   </div>
 
-  <div class="lightbox" id="lightbox">
-  <button class="lightbox-close" id="lightboxClose">✕</button>
-  <button class="lightbox-arrow left" id="prevPhoto">‹</button>
-  <img id="lightboxImg" src="" alt="Foto ampliada de Mate">
-  <button class="lightbox-arrow right" id="nextPhoto">›</button>
-  <div class="lightbox-counter" id="photoCounter">1 / 6</div>
-</div>
+  <!-- Mensaje de estado -->
+  <div class="status-toast" id="statusToast">
+    💚 Gracias por ayudar a Mate. Obteniendo tu ubicación...
+  </div>
 
-<div class="status-toast" id="statusToast">
-  💚 Gracias por ayudar a Mate. 
-</div>
+  <!-- Visor de fotos -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar">✕</button>
+    <button class="lightbox-arrow left" id="prevPhoto" aria-label="Foto anterior">‹</button>
+    <img id="lightboxImg" src="" alt="Foto ampliada de Mate">
+    <button class="lightbox-arrow right" id="nextPhoto" aria-label="Foto siguiente">›</button>
+    <div class="lightbox-counter" id="photoCounter">1 / 7</div>
+  </div>
 
   <script src="script.js"></script>
-
-
 </body>
 </html>
