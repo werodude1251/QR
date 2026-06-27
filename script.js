@@ -59,3 +59,28 @@ document.addEventListener('keydown', event => {
 if('serviceWorker' in navigator){
   window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(()=>{}));
 }
+const stickyButton = document.getElementById("foundBtnSticky");
+if (stickyButton) {
+  stickyButton.addEventListener("click", () => {
+    document.getElementById("foundBtn").click();
+  });
+}
+
+const shareBtn = document.getElementById("shareBtn");
+if (shareBtn) {
+  shareBtn.addEventListener("click", async () => {
+    const url = "https://werodude1251.github.io/QR/?v=40";
+    const text = "Esta es la identificación digital de Mate 🐶";
+
+    if (navigator.share) {
+      await navigator.share({
+        title: "Mate | Identificación digital",
+        text,
+        url
+      });
+    } else {
+      navigator.clipboard.writeText(url);
+      alert("Enlace copiado.");
+    }
+  });
+}
