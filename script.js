@@ -1,6 +1,11 @@
 const phone = "523313976529";
 
 function sendLocation() {
+    const toast = document.getElementById("statusToast");
+  if (toast) {
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 3500);
+  }
   const btns = [
     document.getElementById("foundBtn"),
     document.getElementById("foundBtnBottom"),
