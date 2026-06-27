@@ -1,3 +1,6 @@
-# Mate ID
+# QR-Mate v3.1 compacta
 
-Identificación digital de Mate con botones de contacto, ubicación por WhatsApp, video de YouTube y galería de fotos.
+Versión compacta basada en la primera versión: foto como tarjeta, botones visibles al abrir, video de YouTube incrustado e información médica.
+
+URL sugerida:
+https://werodude1251.github.io/QR-Mate/?v=8
