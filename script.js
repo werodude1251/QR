@@ -1,9 +1,9 @@
 const phone = "523313976529";
+const pageUrl = "https://werodude1251.github.io/QR/";
 
 /* ===========================
-   Botones de ubicación
+   Ubicación / WhatsApp
 =========================== */
-
 function setFoundButtonsText(text) {
     ["foundBtn", "foundBtnBottom", "foundBtnSticky"].forEach((id) => {
         const btn = document.getElementById(id);
@@ -11,20 +11,18 @@ function setFoundButtonsText(text) {
     });
 }
 
-function updateStatusToast(title, subtitle, progress = 0){
+function updateStatusToast(title, subtitle, progress = 0) {
+    const overlay = document.getElementById("rescueOverlay");
+    const titleEl = document.getElementById("rescueTitle");
+    const messageEl = document.getElementById("rescueMessage");
+    const barEl = document.getElementById("rescueBar");
 
-    const toast = document.getElementById("statusToast");
+    if (!overlay || !titleEl || !messageEl || !barEl) return;
 
-    if(!toast) return;
-
-    document.getElementById("toastTitle").innerHTML = title;
-
-    document.getElementById("toastMessage").innerHTML = subtitle;
-
-    document.getElementById("toastBar").style.width = progress + "%";
-
-    toast.classList.add("show");
-
+    titleEl.innerHTML = title;
+    messageEl.innerHTML = subtitle;
+    barEl.style.width = progress + "%";
+    overlay.classList.add("show");
 }
 
 function hideStatusToast(delay = 3500) {
@@ -49,7 +47,8 @@ function openWhatsApp(message) {
 function openWhatsAppNoLocation() {
     updateStatusToast(
         "⚠️ No pude obtener ubicación",
-        "Abriré WhatsApp para que puedas escribirle a Paola."
+        "💬 Abriendo WhatsApp para contactar a Paola...",
+        100
     );
 
     const message =
@@ -60,11 +59,12 @@ function openWhatsAppNoLocation() {
 }
 
 function sendLocation() {
-  updateStatusToast(
-    "💚 Gracias por ayudar a Mate",
-    "📍 Localizando tu ubicación...",
-    35
-);
+    updateStatusToast(
+        "💚 Gracias por ayudar a Mate",
+        "📍 Localizando tu ubicación...",
+        35
+    );
+
     setFoundButtonsText("📍 Obteniendo ubicación...");
 
     if (!navigator.geolocation) {
@@ -78,12 +78,11 @@ function sendLocation() {
             const lon = position.coords.longitude;
             const mapsUrl = `https://maps.google.com/?q=${lat},${lon}`;
 
- updateStatusToast(
-    "✅ Ubicación obtenida",
-    "💬 Preparando WhatsApp...",
-    100
-);
-
+            updateStatusToast(
+                "✅ Ubicación obtenida",
+                "💬 Preparando WhatsApp...",
+                100
+            );
 
             const message =
                 `Hola Paola 👋%0A%0A` +
@@ -109,36 +108,33 @@ function sendLocation() {
     if (btn) btn.addEventListener("click", sendLocation);
 });
 
-
 /* ===========================
    Compartir página
 =========================== */
-
 const shareBtn = document.getElementById("shareBtn");
 
 if (shareBtn) {
     shareBtn.addEventListener("click", async () => {
-        const url = "https://werodude1251.github.io/QR/";
         const text = "Esta es la identificación digital de Mate 🐶";
 
         if (navigator.share) {
-            await navigator.share({
-                title: "Mate | Identificación digital",
-                text,
-                url
-            });
+            try {
+                await navigator.share({
+                    title: "Mate | Identificación digital",
+                    text,
+                    url: pageUrl
+                });
+            } catch (_) {}
         } else {
-            await navigator.clipboard.writeText(url);
+            await navigator.clipboard.writeText(pageUrl);
             alert("Enlace copiado.");
         }
     });
 }
 
-
 /* ===========================
    Galería / lightbox
 =========================== */
-
 const galleryImages = [
     document.querySelector(".mate-photo"),
     ...Array.from(document.querySelectorAll(".gallery-grid img"))
@@ -154,10 +150,10 @@ const photoCounter = document.getElementById("photoCounter");
 let currentPhotoIndex = 0;
 
 function showPhoto(index) {
-    if (!galleryImages.length) return;
+    if (!galleryImages.length || !lightboxImg) return;
 
     currentPhotoIndex = (index + galleryImages.length) % galleryImages.length;
-    lightboxImg.src = galleryImages[currentPhotoIndex].src;
+    lightboxImg.src = galleryImages[currentPhotoIndex].currentSrc || galleryImages[currentPhotoIndex].src;
 
     if (photoCounter) {
         photoCounter.textContent = `${currentPhotoIndex + 1} / ${galleryImages.length}`;
@@ -169,12 +165,16 @@ if (galleryImages.length && lightbox && lightboxImg && lightboxClose) {
         img.addEventListener("click", () => {
             showPhoto(index);
             lightbox.classList.add("show");
+            lightbox.setAttribute("aria-hidden", "false");
         });
     });
 
-    lightboxClose.addEventListener("click", () => {
+    function closeLightbox() {
         lightbox.classList.remove("show");
-    });
+        lightbox.setAttribute("aria-hidden", "true");
+    }
+
+    lightboxClose.addEventListener("click", closeLightbox);
 
     if (prevPhoto) {
         prevPhoto.addEventListener("click", (e) => {
@@ -194,39 +194,47 @@ if (galleryImages.length && lightbox && lightboxImg && lightboxClose) {
 
     lightboxImg.addEventListener("touchstart", (e) => {
         startX = e.touches[0].clientX;
-    });
+    }, { passive: true });
 
     lightboxImg.addEventListener("touchend", (e) => {
         const endX = e.changedTouches[0].clientX;
         const diff = startX - endX;
 
         if (Math.abs(diff) > 50) {
-            if (diff > 0) {
-                showPhoto(currentPhotoIndex + 1);
-            } else {
-                showPhoto(currentPhotoIndex - 1);
-            }
+            showPhoto(diff > 0 ? currentPhotoIndex + 1 : currentPhotoIndex - 1);
         }
     });
 
     lightbox.addEventListener("click", (e) => {
-        if (e.target === lightbox) {
-            lightbox.classList.remove("show");
-        }
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    window.addEventListener("keydown", (e) => {
+        if (!lightbox.classList.contains("show")) return;
+        if (e.key === "Escape") closeLightbox();
+        if (e.key === "ArrowLeft") showPhoto(currentPhotoIndex - 1);
+        if (e.key === "ArrowRight") showPhoto(currentPhotoIndex + 1);
     });
 }
-
 
 /* ===========================
    Splash screen
 =========================== */
-
 const splashScreen = document.getElementById("splashScreen");
 
 if (splashScreen) {
     window.addEventListener("load", () => {
         setTimeout(() => {
             splashScreen.classList.add("hide");
-        }, 1100);
+        }, 900);
+    });
+}
+
+/* ===========================
+   Service Worker
+=========================== */
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("sw.js").catch(() => {});
     });
 }

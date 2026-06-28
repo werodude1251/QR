@@ -5,11 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#08111f" />
   <title>Mate | Identificación digital</title>
+  <meta name="description" content="Identificación digital de Mate. Si lo encontraste, ayuda a contactar a su familia." />
+  <link rel="preload" as="image" href="img/mate.webp" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="manifest" href="manifest.json" />
 </head>
 <body>
-  <!-- Pantalla de bienvenida -->
   <div class="splash-screen" id="splashScreen" aria-hidden="true">
     <div class="splash-content">
       <div class="splash-paw">🐾</div>
@@ -19,23 +20,25 @@
   </div>
 
   <main class="app-shell">
+    <div class="status-banner lost" id="mateStatus">
+      🔴 <strong>Mate está perdido</strong>
+      <span>Si lo encontraste, por favor ayúdame a regresar con mi familia.</span>
+    </div>
 
-<div class="status-banner lost" id="mateStatus">
-    🔴 <strong>Mate está perdido</strong>
-    <span>Si lo encontraste, por favor ayúdame a regresar con mi familia.</span>
-</div>
+    <section class="hero-card reveal">
+      <div class="badge">🐾 Ayúdame a volver a casa</div>
 
-<section class="hero-card reveal">
-
-      <img class="mate-photo" src="img/mate.jpg" alt="Foto de Mate, perrito blanco tipo Maltés" />
-      <p class="photo-caption">🐶 French • 🤍 Blanco • 🎂 11 años</p>
+      <picture>
+        <source srcset="img/mate.webp" type="image/webp" />
+        <img class="mate-photo" src="img/mate.jpg" alt="Foto de Mate, perrito blanco tipo Maltés" width="1200" height="900" />
+      </picture>
+      <p class="photo-caption">🐶 Maltés • 🤍 Blanco • 🎂 11 años</p>
 
       <div class="hero-content">
         <p class="eyebrow">🐾 Identificación digital</p>
         <h1>Hola, soy Mate</h1>
         <p class="message">
-          Estoy perdido. Si me encontraste, por favor ayúdame a regresar con mi familia.
-          Mi dueña Paola me quiere mucho y necesito volver a casa para seguir recibiendo mis cuidados especiales.
+          Estoy perdido. Si me encontraste, por favor ayúdame a regresar con mi familia. Mi dueña Paola me quiere mucho y necesito volver a casa para seguir recibiendo mis cuidados especiales.
         </p>
 
         <button class="primary-btn" id="foundBtn">📍 Encontré a Mate</button>
@@ -47,13 +50,12 @@
       </div>
     </section>
 
-    <!-- Video -->
-    <section class="card reveal">
+    <section class="card reveal video-card">
       <h2>🎥 Conoce a Mate</h2>
-      <p class="section-hint">Video corto para reconocerlo mejor.</p>
-
+      <p class="section-hint">Toca reproducir para ver el video dentro de la página.</p>
       <div class="video-frame">
         <iframe
+          loading="lazy"
           src="https://www.youtube.com/embed/xTPfSoeQg5o"
           title="Video de Mate"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -62,22 +64,19 @@
       </div>
     </section>
 
-    <!-- Galería -->
     <section class="card reveal">
       <h2>📷 Más fotos de Mate</h2>
       <p class="section-hint">Toca una foto para verla grande. Puedes deslizar para cambiar de foto.</p>
-
       <div class="gallery-grid">
-        <img src="img/mate1.jpg" alt="Mate">
-        <img src="img/mate2.jpg" alt="Mate">
-        <img src="img/mate3.jpg" alt="Mate">
-        <img src="img/mate4.jpg" alt="Mate">
-        <img src="img/mate5.jpg" alt="Mate">
-        <img src="img/mate6.jpg" alt="Mate">
+        <picture><source srcset="img/mate1.webp" type="image/webp"><img loading="lazy" src="img/mate1.jpg" alt="Foto de Mate 1"></picture>
+        <picture><source srcset="img/mate2.webp" type="image/webp"><img loading="lazy" src="img/mate2.jpg" alt="Foto de Mate 2"></picture>
+        <picture><source srcset="img/mate3.webp" type="image/webp"><img loading="lazy" src="img/mate3.jpg" alt="Foto de Mate 3"></picture>
+        <picture><source srcset="img/mate4.webp" type="image/webp"><img loading="lazy" src="img/mate4.jpg" alt="Foto de Mate 4"></picture>
+        <picture><source srcset="img/mate5.webp" type="image/webp"><img loading="lazy" src="img/mate5.jpg" alt="Foto de Mate 5"></picture>
+        <picture><source srcset="img/mate6.webp" type="image/webp"><img loading="lazy" src="img/mate6.jpg" alt="Foto de Mate 6"></picture>
       </div>
     </section>
 
-    <!-- Información -->
     <section class="card reveal">
       <h2>🐶 Información de Mate</h2>
       <div class="info-grid">
@@ -88,16 +87,13 @@
       </div>
     </section>
 
-    <!-- Cuidados -->
     <section class="card alert-card reveal">
       <h2>🚨 Cuidado importante</h2>
       <p>
-        Mate necesita cuidado especial por su riñón. Por favor <strong>no le des comida humana</strong>.
-        Necesita dieta renal especial y volver pronto con Paola.
+        Mate necesita cuidado especial por su riñón. Por favor <strong>no le des comida humana</strong>. Necesita dieta renal especial y volver pronto con Paola.
       </p>
     </section>
 
-    <!-- Cómo soy -->
     <section class="card reveal">
       <h2>🐾 Cómo soy</h2>
       <div class="info-grid">
@@ -108,7 +104,6 @@
       </div>
     </section>
 
-    <!-- Contacto -->
     <section class="card contact-card reveal">
       <h2>👩 Contacto</h2>
       <p><strong>Dueña:</strong> Paola de León</p>
@@ -119,40 +114,32 @@
     <footer>
       Gracias por ayudar a Mate 🐾❤️
     </footer>
+
+    <div class="sticky-actions">
+      <button class="primary-btn sticky-primary" id="foundBtnSticky">📍 Encontré a Mate</button>
+      <button class="share-btn" id="shareBtn">🔗 Compartir</button>
+    </div>
   </main>
 
-  <!-- Barra fija inferior -->
-  <div class="sticky-actions">
-    <button class="primary-btn" id="foundBtnSticky">📍 Encontré a Mate</button>
-    <button class="share-btn" id="shareBtn">🔗 Compartir</button>
-  </div>
-
-  <!-- Mensaje de estado -->
- <div class="status-toast" id="statusToast">
-
- <div class="rescue-overlay" id="rescueOverlay">
-  <div class="rescue-card">
-    <div class="rescue-paw">🐾</div>
-
-    <h2 id="rescueTitle">Gracias por ayudar a Mate</h2>
-    <p id="rescueMessage">Preparando...</p>
-
-    <div class="rescue-progress">
-      <div class="rescue-progress-bar" id="rescueBar"></div>
+  <div class="rescue-overlay" id="rescueOverlay" aria-hidden="true">
+    <div class="rescue-card">
+      <div class="rescue-paw">🐾</div>
+      <h2 id="rescueTitle">Gracias por ayudar a Mate</h2>
+      <p id="rescueMessage">Preparando...</p>
+      <div class="rescue-progress">
+        <div class="rescue-progress-bar" id="rescueBar"></div>
+      </div>
     </div>
   </div>
-</div>
 
-
-  <!-- Visor de fotos -->
-  <div class="lightbox" id="lightbox">
+  <div class="lightbox" id="lightbox" aria-hidden="true">
     <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar">✕</button>
     <button class="lightbox-arrow left" id="prevPhoto" aria-label="Foto anterior">‹</button>
-    <img id="lightboxImg" src="" alt="Foto ampliada de Mate">
+    <img id="lightboxImg" src="" alt="Foto ampliada de Mate" />
     <button class="lightbox-arrow right" id="nextPhoto" aria-label="Foto siguiente">›</button>
     <div class="lightbox-counter" id="photoCounter">1 / 7</div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
