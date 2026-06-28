@@ -11,16 +11,20 @@ function setFoundButtonsText(text) {
     });
 }
 
-function updateStatusToast(title, subtitle) {
-    const toast = document.getElementById("statusToast");
-    if (!toast) return;
+function updateStatusToast(title, subtitle, progress = 0){
 
-    toast.innerHTML = `
-        <strong>${title}</strong>
-        <span>${subtitle}</span>
-    `;
+    const toast = document.getElementById("statusToast");
+
+    if(!toast) return;
+
+    document.getElementById("toastTitle").innerHTML = title;
+
+    document.getElementById("toastMessage").innerHTML = subtitle;
+
+    document.getElementById("toastBar").style.width = progress + "%";
 
     toast.classList.add("show");
+
 }
 
 function hideStatusToast(delay = 3500) {
@@ -55,10 +59,10 @@ function openWhatsAppNoLocation() {
 
 function sendLocation() {
     updateStatusToast(
-        "💚 Gracias por ayudar a Mate",
-        "📍 Localizando tu ubicación..."
-    );
-
+    "💚 Gracias por ayudar a Mate",
+    "📍 Localizando tu ubicación...",
+    30
+);
     setFoundButtonsText("📍 Obteniendo ubicación...");
 
     if (!navigator.geolocation) {
@@ -73,9 +77,10 @@ function sendLocation() {
             const mapsUrl = `https://maps.google.com/?q=${lat},${lon}`;
 
             updateStatusToast(
-                "✅ Ubicación obtenida",
-                "Abriendo WhatsApp..."
-            );
+    "✅ Ubicación obtenida",
+    "💬 Preparando WhatsApp...",
+    100
+);
 
             const message =
                 `Hola Paola 👋%0A%0A` +
