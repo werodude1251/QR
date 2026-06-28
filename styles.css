@@ -479,3 +479,67 @@ footer{
   .info-grid{grid-template-columns:1fr}
   .mate-photo{max-height:260px}
 }
+
+.status-toast strong{
+  display:block;
+  font-size:16px;
+}
+
+.status-toast span{
+  display:block;
+  margin-top:4px;
+  font-size:13px;
+  opacity:.95;
+}
+
+/*==============================
+    Estado de Mate
+==============================*/
+
+.status-banner{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+
+    padding:16px 18px;
+    margin-bottom:18px;
+
+    border-radius:22px;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    backdrop-filter:blur(18px);
+
+    animation:statusPop .6s ease;
+}
+
+.status-banner strong{
+    font-size:17px;
+}
+
+.status-banner span{
+    color:#dbe4f0;
+    font-size:14px;
+}
+
+.status-banner.lost{
+    background:linear-gradient(135deg,#b91c1c,#dc2626);
+}
+
+.status-banner.home{
+    background:linear-gradient(135deg,#16a34a,#22c55e);
+}
+
+@keyframes statusPop{
+
+    from{
+        opacity:0;
+        transform:translateY(-15px);
+    }
+
+    to{
+        opacity:1;
+        transform:none;
+    }
+
+}
