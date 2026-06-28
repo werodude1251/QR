@@ -28,11 +28,13 @@ function updateStatusToast(title, subtitle, progress = 0){
 }
 
 function hideStatusToast(delay = 3500) {
-    const toast = document.getElementById("statusToast");
-    if (!toast) return;
+    const overlay = document.getElementById("rescueOverlay");
+    if (!overlay) return;
 
     setTimeout(() => {
-        toast.classList.remove("show");
+        overlay.classList.remove("show");
+        const barEl = document.getElementById("rescueBar");
+        if (barEl) barEl.style.width = "0%";
     }, delay);
 }
 
@@ -58,10 +60,10 @@ function openWhatsAppNoLocation() {
 }
 
 function sendLocation() {
-    updateStatusToast(
+  updateStatusToast(
     "💚 Gracias por ayudar a Mate",
     "📍 Localizando tu ubicación...",
-    30
+    35
 );
     setFoundButtonsText("📍 Obteniendo ubicación...");
 
@@ -76,11 +78,12 @@ function sendLocation() {
             const lon = position.coords.longitude;
             const mapsUrl = `https://maps.google.com/?q=${lat},${lon}`;
 
-            updateStatusToast(
+ updateStatusToast(
     "✅ Ubicación obtenida",
     "💬 Preparando WhatsApp...",
     100
 );
+
 
             const message =
                 `Hola Paola 👋%0A%0A` +
